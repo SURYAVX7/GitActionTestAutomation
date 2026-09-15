@@ -2,10 +2,12 @@ name: Selenium Java Tests
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   selenium-tests:
@@ -16,13 +18,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "21"
           distribution: "temurin"
           cache: maven
 
-      - name: Set up Maven
+      - name: Check Java Version
+        run: java -version
+
+      - name: Check Maven
         run: mvn -version
 
       - name: Run TestNG Suite
@@ -34,3 +39,4 @@ jobs:
         with:
           name: TestNG-Reports
           path: target/surefire-reports/
+          if-no-files-found: warn
