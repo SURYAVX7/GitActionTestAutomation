@@ -39,4 +39,5 @@ jobs:
         with:
           name: TestNG-Reports
           path: target/surefire-reports/
+          retention-days: 7
           if-no-files-found: warn
